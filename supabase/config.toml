@@ -1,0 +1,34 @@
+project_id = "partner-sequencer"
+
+[functions.save-credential]
+verify_jwt = true
+
+[functions.test-connection]
+verify_jwt = true
+
+[functions.pull-context]
+verify_jwt = true
+
+[functions.sync-brand-guide]
+verify_jwt = true
+
+[functions.generate-sequence]
+verify_jwt = true
+
+[functions.regenerate-email]
+verify_jwt = true
+
+[functions.refresh-voice-profile]
+verify_jwt = true
+
+# oauth-google / oauth-microsoft handle two very different callers on one
+# endpoint: the app (with a JWT, for /init) and the provider's browser
+# redirect (no JWT at all, for /callback, protected instead by our own
+# encrypted `state` param). Supabase's platform-level JWT check has to be off
+# for the whole function so the callback isn't rejected before it runs;
+# requireUser() still enforces auth on the /init path from inside the code.
+[functions.oauth-google]
+verify_jwt = false
+
+[functions.oauth-microsoft]
+verify_jwt = false
