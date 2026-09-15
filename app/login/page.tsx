@@ -1,5 +1,11 @@
 "use client";
 
+// Forces this page to render per-request instead of being statically
+// prerendered at build time. Without this, `next build` tries to prerender it
+// and crashes if NEXT_PUBLIC_SUPABASE_URL/ANON_KEY aren't set yet (e.g. before
+// the Supabase project exists) - deploys should succeed independent of that.
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
