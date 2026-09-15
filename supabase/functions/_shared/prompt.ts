@@ -47,6 +47,7 @@ export function buildSequenceSystemPrompt(opts: {
   voiceProfileSummary: string;
   userName: string;
   userRole: string;
+  language: string;
 }): string {
   const guidance = SEQUENCE_GUIDANCE[opts.sequenceType];
   const counterpart = opts.account.account_type === "partner_distributor" ? "channel partner" : "customer";
@@ -67,8 +68,10 @@ ${opts.brandGuideContent || "(No brand guide content configured yet - use standa
 
 FORMALITY RULES (apply on top of both voice layers - these always win):
 - Dial the register up to formal/professional. No slang, no emoji, complete sentences.
-- Greeting is always "Hello [First Name]," - never "Dear [First Name],".
+- Greeting convention: formal, first name only, comma, no informal alternative (in English this is "Hello [First Name]," never "Dear [First Name],"). When writing in another language (see LANGUAGE below), use that language's natural equivalent of the same convention - formal register, first name only - rather than a literal translation of the English word "Hello".
 - Never fabricate specifics (numbers, dates, commitments, names) that are not present in the context the user message provides. If context is thin for a claim you'd want to make, write around it generically rather than inventing detail, and note the gap.
+
+LANGUAGE: Write the entire email - subject and body - in ${opts.language}. Keep Hubstaff product and feature names as given in the brand guide untranslated (proper nouns), and adapt everything else (including idiom, date/number formatting conventions, and the greeting) naturally for a native ${opts.language} business reader rather than producing a literal translation from English.
 
 The user message will provide the account details and source-tagged context items (each with an id in [id:...] you must reference when you use it).`;
 }

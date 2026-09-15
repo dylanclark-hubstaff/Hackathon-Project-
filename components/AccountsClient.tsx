@@ -9,7 +9,7 @@ import { Input, Label, Select, Textarea } from "@/components/ui/Input";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Card";
 import type { Account, AccountType, AccountStage, UserRole } from "@/lib/types";
-import { ACCOUNT_TYPE_LABELS } from "@/lib/types";
+import { ACCOUNT_TYPE_LABELS, COMMON_OUTREACH_LANGUAGES } from "@/lib/types";
 
 const STAGE_TONE: Record<AccountStage, "slate" | "green" | "amber" | "blue"> = {
   prospect: "blue",
@@ -109,6 +109,8 @@ function NewAccountForm({
   const [contactEmail, setContactEmail] = useState("");
   const [accountType, setAccountType] = useState<AccountType>(defaultType);
   const [region, setRegion] = useState("");
+  const [language, setLanguage] = useState("English");
+  const [customLanguage, setCustomLanguage] = useState("");
   const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -131,6 +133,7 @@ function NewAccountForm({
         primary_contact_email: contactEmail || null,
         account_type: accountType,
         region: region || null,
+        language: language === "Other" ? customLanguage.trim() || "English" : language,
         notes: notes || null,
       })
       .select("id")
@@ -175,6 +178,26 @@ function NewAccountForm({
           <div>
             <Label htmlFor="region">Region / country</Label>
             <Input id="region" value={region} onChange={(e) => setRegion(e.target.value)} placeholder="e.g. Brazil" />
+          </div>
+          <div>
+            <Label htmlFor="language">Outreach language</Label>
+            <Select id="language" value={language} onChange={(e) => setLanguage(e.target.value)}>
+              {COMMON_OUTREACH_LANGUAGES.map((l) => (
+                <option key={l} value={l}>
+                  {l}
+                </option>
+              ))}
+              <option value="Other">Other (specify)...</option>
+            </Select>
+            {language === "Other" && (
+              <Input
+                className="mt-2"
+                placeholder="e.g. Czech"
+                value={customLanguage}
+                onChange={(e) => setCustomLanguage(e.target.value)}
+              />
+            )}
+            <p className="mt-1 text-xs text-slate-400">Sequences for this account are drafted natively in this language.</p>
           </div>
           <div className="sm:col-span-2">
             <Label htmlFor="notes">Notes</Label>

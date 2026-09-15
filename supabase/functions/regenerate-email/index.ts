@@ -50,6 +50,7 @@ Deno.serve(async (req) => {
       voiceProfileSummary: voiceProfile?.style_summary ?? "",
       userName: profile?.name ?? "the sender",
       userRole: profile?.role ?? "account_executive",
+      language: account.language,
     });
 
     const userPrompt = `Regenerate ONLY email #${email.position} of this sequence (send offset day ${

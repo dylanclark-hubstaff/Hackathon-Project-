@@ -51,6 +51,7 @@ Deno.serve(async (req) => {
       voiceProfileSummary: voiceProfile?.style_summary ?? "",
       userName: profile?.name ?? "the sender",
       userRole: profile?.role ?? "account_executive",
+      language: account.language,
     });
     const userPrompt = buildSequenceUserPrompt({ account, contextItems: contextItems ?? [] });
 

@@ -22,6 +22,7 @@ export interface Account {
   region: string | null;
   stage: AccountStage;
   notes: string | null;
+  language: string;
 }
 
 export interface ContextItem {

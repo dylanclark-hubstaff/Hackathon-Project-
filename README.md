@@ -75,6 +75,10 @@ cp .env.example .env.local   # fill in NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SU
 npm run dev
 ```
 
+## Multi-language outreach
+
+Each account has an `language` field (`accounts.language`, default `"English"`). The New Account form offers a shortlist covering current (Brazil) and planned LATAM/APAC/EMEA expansion, plus a free-text "Other" option — so it's not capped to a fixed list. `generate-sequence` and `regenerate-email` pass this straight into the drafting prompt, which writes the whole email natively in that language (adapting the formal greeting convention rather than translating "Hello" literally) while keeping Hubstaff product/feature names untranslated. Internal-facing text (context summaries, the "why this email" panel) stays in English regardless, since that's for the Hubstaff user reviewing the draft, not the recipient.
+
 ## Notes on the data model vs. the spec
 
 - `contacts` (a second contact per account beyond the primary one) exists in the schema for future use but has no UI yet — the core loop uses `accounts.primary_contact_name/email` for context search and drafting.

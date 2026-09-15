@@ -30,6 +30,7 @@ export interface Account {
   region: string | null;
   stage: AccountStage;
   notes: string | null;
+  language: string;
   created_at: string;
   updated_at: string;
 }
@@ -113,3 +114,29 @@ export const ACCOUNT_TYPE_LABELS: Record<AccountType, string> = {
   partner_distributor: "Partner / Distributor",
   end_user: "Customer",
 };
+
+// A curated shortlist covering current (Brazil) and planned (LATAM/APAC/EMEA)
+// expansion - not exhaustive. The language field is free text under the hood
+// (see the New account form), so any language can be typed in beyond this list;
+// this just saves a keystroke for the common ones.
+export const COMMON_OUTREACH_LANGUAGES = [
+  "English",
+  "Spanish",
+  "Portuguese (Brazil)",
+  "Portuguese (Portugal)",
+  "French",
+  "German",
+  "Italian",
+  "Dutch",
+  "Polish",
+  "Turkish",
+  "Arabic",
+  "Hindi",
+  "Japanese",
+  "Korean",
+  "Mandarin Chinese",
+  "Vietnamese",
+  "Thai",
+  "Indonesian",
+  "Filipino (Tagalog)",
+];

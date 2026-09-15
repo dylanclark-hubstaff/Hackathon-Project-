@@ -87,7 +87,7 @@ export function AccountDetailClient({
             <h1 className="text-xl font-semibold text-slate-900">{account.company_name}</h1>
             <p className="text-sm text-slate-500">
               {ACCOUNT_TYPE_LABELS[account.account_type]} · {account.stage}
-              {account.region ? ` · ${account.region}` : ""}
+              {account.region ? ` · ${account.region}` : ""} · Outreach in {account.language}
             </p>
             {account.primary_contact_name && (
               <p className="mt-1 text-sm text-slate-600">
@@ -156,6 +156,7 @@ export function AccountDetailClient({
                   </option>
                 ))}
               </Select>
+              <p className="text-xs text-slate-400">Drafted in {account.language}, matching this account's outreach language.</p>
               {genError && <p className="text-sm text-red-600">{genError}</p>}
               <Button onClick={handleGenerate} disabled={generating} className="w-full">
                 {generating ? "Generating..." : "Generate sequence"}
